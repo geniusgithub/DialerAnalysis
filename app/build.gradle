@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile project(':com.android.contacts.common')
     compile project(':com.android.phone.common')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

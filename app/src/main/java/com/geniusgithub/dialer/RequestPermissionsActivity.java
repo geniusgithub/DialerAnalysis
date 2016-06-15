@@ -33,7 +33,7 @@ import com.geniusgithub.dialer.R;
 public class RequestPermissionsActivity extends Activity{
 	
 	 
-	 private final static String TAG = "RequestPermissionsActivity";
+	 private final static String TAG = RequestPermissionsActivity.class.getSimpleName();
 	 
 	 private final int REQUEST_PHONE_PERMISSION =  0X0001;
 	 private final int REQUEST_CONTACT_PERMISSION =  0X0002;
