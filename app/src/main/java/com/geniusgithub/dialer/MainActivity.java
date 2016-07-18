@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
-
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
     }
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void onCalllog(){
-
+        Intent intent = new Intent();
+        intent.setClass(this, CallLogActivity.class);
+        startActivity(intent);
     }
 }
