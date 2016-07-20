@@ -58,7 +58,7 @@
         <activity android:name=".contact.ContactUnitActivity"     android:label="ContactUnit">
         </activity>
 
-        <activity android:name=".calllog.CallLogActivity"     android:label="ContactUnit">
+        <activity android:name=".calllog.CallLogActivity"     android:label="CallLog">
         </activity>
     </application>
 

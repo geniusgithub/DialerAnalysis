@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.geniusgithub.dialer.R;
 
-public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder>{
+public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder> implements CallLogListItemViewHolder.onItemClickListener {
     
 	private Context mContext;
     private Cursor mCursor;
@@ -36,8 +36,13 @@ public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder>{
             notifyDataSetChanged();
         }
     }
-   
-   
+
+    public CallLogListItemViewHolder.onItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(CallLogListItemViewHolder.onItemClickListener listener){
+        mOnItemClickListener = listener;
+    }
+
+
    @Override
    public int getItemCount() {
 	   int itemCount = 0;
@@ -99,7 +104,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder>{
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(view);
-
+        viewHolder.setOnItemClickListener(this);
         return viewHolder;
     }
     
@@ -111,13 +116,14 @@ public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder>{
 
         CallDetail detail = CallDetail.from(cursor);
         CallLogListItemViewHolder callLogListItemViewHolder = (CallLogListItemViewHolder) viewHolder;
-        callLogListItemViewHolder.setNumber(detail.number);
-        callLogListItemViewHolder.setDate(detail.date);
-        callLogListItemViewHolder.setDuration(detail.duration);
-        callLogListItemViewHolder.setCallType(detail.calltype);
+        callLogListItemViewHolder.bindInfo(detail, position);
     }
-    
-    
 
 
+    @Override
+    public void onItemClick(CallDetail detail, int position) {
+        if (mOnItemClickListener != null){
+            mOnItemClickListener.onItemClick(detail, position);
+        }
+    }
 }

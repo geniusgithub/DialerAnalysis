@@ -5,6 +5,24 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/com.android.common" />
+            <option value="$PROJECT_DIR$/com.android.contacts.common" />
+            <option value="$PROJECT_DIR$/com.android.phone.common" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/com.android.common" />
+            <option value="$PROJECT_DIR$/com.android.contacts.common" />
+            <option value="$PROJECT_DIR$/com.android.phone.common" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

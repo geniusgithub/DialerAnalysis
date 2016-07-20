@@ -8,15 +8,24 @@ import android.widget.TextView;
 
 import com.geniusgithub.dialer.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+public class CallLogListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-public class CallLogListItemViewHolder extends RecyclerView.ViewHolder{
+
+	public static interface onItemClickListener{
+		public void onItemClick(CallDetail detail, int position);
+	}
+
+	public TextView mGroupLable;
 
 	public TextView mNumber;
 	public TextView mDate;
 	public TextView mDuration;
 	public TextView mCallType;
+
+	public CallDetail mCallDetail;
+	public int mPosition;
+	public onItemClickListener mOnItemClickListener;
+
 	
 	public CallLogListItemViewHolder(View itemView) {
 		super(itemView);
@@ -24,63 +33,65 @@ public class CallLogListItemViewHolder extends RecyclerView.ViewHolder{
 		mDate = (TextView) itemView.findViewById(R.id.date);
 		mDuration = (TextView) itemView.findViewById(R.id.duration);
 		mCallType = (TextView) itemView.findViewById(R.id.calltype);
+		mGroupLable = (TextView) itemView.findViewById(R.id.call_log_day_group_label);
+
+		itemView.setOnClickListener(this);
+	}
+
+	public void bindInfo(CallDetail detail, int pos){
+		mCallDetail = detail;
+		mPosition = pos;
+		setNumber(detail.number);
+		setDate(detail.date);
+		setDuration(detail.duration);
+		setCallType(detail.calltype);
+		setPosition(mPosition);
+	}
+
+	public void setOnItemClickListener(onItemClickListener listener){
+		mOnItemClickListener = listener;
 	}
 
 
-	public void setNumber(String number){
+
+
+
+	private void setPosition(int pos){
+		String value = "position: " + pos;
+		mGroupLable.setText(value);
+	}
+
+
+	private void setNumber(String number){
 		String value = "number: " + number;
 		mNumber.setText(value);
 	}
 
-	public void setDate(long date){
-		String value = "date: " + getStringDate(date);
+	private void setDate(long date){
+		String value = "date: " + CallLogUtil.getStringDate(date);
 		mDate.setText(value);
 	}
 
-	public void setDuration(long duration){
-		String value = "duration: " + formatteDuration(duration);
+	private void setDuration(long duration){
+		String value = "duration: " + CallLogUtil.formatteDuration(duration);
 		mDuration.setText(value);
 	}
 
-	public void setCallType(int callType){
-		updateCalltype(callType);
-	}
-
-
-
-
-	public static String getStringDate(long date) {
-		Date currentTime = new Date(date);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 	HH:mm:ss");
-		String dateString = formatter.format(currentTime);
-		return dateString;
-	}
-
-
-	private String formatteDuration(long duration){
-		return String.valueOf(duration);
-	}
-
-
-	private void updateCalltype(int  calltype){
-		mCallType.setTextColor(Color.GRAY);
-		String value = "unknown";
-		switch( calltype){
-			case CallLog.Calls.INCOMING_TYPE:
-				value = "INCOMING_TYPE";
-				break;
-			case CallLog.Calls.OUTGOING_TYPE:
-				value =  "OUTGOING_TYPE";
-				break;
-			case CallLog.Calls.MISSED_TYPE:
-				value =  "MISSED_TYPE";
-				mCallType.setTextColor(Color.RED);
-				break;
-			case CallLog.Calls.VOICEMAIL_TYPE:
-				value = "VOICEMAIL_TYPE";
-				break;
+	private void setCallType(int callType){
+		if (callType == CallLog.Calls.MISSED_TYPE){
+			mCallType.setTextColor(Color.RED);
+		}else{
+			mCallType.setTextColor(Color.GRAY);
 		}
-	;
-		mCallType.setText("CallType: " + value);
+
+		mCallType.setText("CallType: " + CallLogUtil.getCalltype(callType));
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		if (mOnItemClickListener != null){
+			mOnItemClickListener.onItemClick(mCallDetail, mPosition);
+		}
 	}
 }

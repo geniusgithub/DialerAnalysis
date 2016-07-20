@@ -17,16 +17,19 @@
 package com.geniusgithub.dialer.calllog;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.geniusgithub.dialer.R;
 import com.geniusgithub.dialer.util.AlwaysLog;
@@ -36,10 +39,10 @@ import com.geniusgithub.dialer.util.AlwaysLog;
  * Displays a list of call log entries. To filter for a particular kind of call
  * (all, missed or voicemails), specify it in the constructor.
  */
-public class CallLogFragment extends Fragment implements CallLogQueryHandler.Listener, View.OnClickListener{
+public class CallLogFragment extends Fragment implements CallLogQueryHandler.Listener, View.OnClickListener,
+                                                                 CallLogListItemViewHolder.onItemClickListener{
     private static final String TAG = CallLogFragment.class.getSimpleName();
 
-    private Button mBtnQuery;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
@@ -72,8 +75,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         View view = inflater.inflate(R.layout.call_log_fragment, container, false);
 
-        mBtnQuery = (Button) view.findViewById(R.id.btn_query);
-        mBtnQuery.setOnClickListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -83,7 +84,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
         mAdapter = new CallLogAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
-
+        mAdapter.setOnItemClickListener(this);
 
         
         return view;
@@ -96,6 +97,31 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     }
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.calllog_options_menu, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.query_calllog:
+                fetchCalls();
+                break;
+            case R.id.delete_calllog:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onResume() {
@@ -134,11 +160,19 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_query:
-                fetchCalls();
-                break;
+
         }
     }
 
+    @Override
+    public void onItemClick(CallDetail detail, int position) {
+        String value = "position = " + position + "\nnumber: " + detail.number + ", date = "  +
+                         CallLogUtil.getStringDate(detail.date) + ", type = " +
+                         CallLogUtil.getCalltype(detail.calltype);
+
+        AlwaysLog.i(TAG, value);
+
+        Toast.makeText(getActivity(),"pos = " + position + ", number = " + detail.number, Toast.LENGTH_SHORT).show();
+    }
 
 }
