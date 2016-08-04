@@ -165,7 +165,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     }
 
     @Override
-    public void onItemClick(CallDetail detail, int position) {
+    public void onItemClick(CallLogListItemViewHolder viewHolder, int position) {
+        CallDetail detail = viewHolder.getCallDetail();
         String value = "position = " + position + "\nnumber: " + detail.number + ", date = "  +
                          CallLogUtil.getStringDate(detail.date) + ", type = " +
                          CallLogUtil.getCalltype(detail.calltype);

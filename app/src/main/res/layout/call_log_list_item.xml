@@ -67,7 +67,7 @@
                     android:layout_marginStart="16dp">
 
                     <TextView
-                        android:id="@+id/number"
+                        android:id="@+id/number_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#333333"

@@ -37,7 +37,11 @@
             android:src="@drawable/ic_info_outline_24dp" />
 
         <TextView
+            android:id="@+id/extra_tv"
             style="@style/CallLogActionTextStyle"
+            android:singleLine="false"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
             android:text="call_dtail" />
 
     </LinearLayout>

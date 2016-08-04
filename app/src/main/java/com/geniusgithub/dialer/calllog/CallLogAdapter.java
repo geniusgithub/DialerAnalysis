@@ -14,8 +14,10 @@ public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder> implements 
     
 	private Context mContext;
     private Cursor mCursor;
-    
-    
+
+    private int mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+
+
 	public CallLogAdapter(Context context){
 		super();
 		mContext = context;
@@ -114,16 +116,37 @@ public class CallLogAdapter extends RecyclerView.Adapter<ViewHolder> implements 
             return;
         }
 
+
         CallDetail detail = CallDetail.from(cursor);
         CallLogListItemViewHolder callLogListItemViewHolder = (CallLogListItemViewHolder) viewHolder;
         callLogListItemViewHolder.bindInfo(detail, position);
+
+        if (mCurrentlyExpandedPosition == position){
+            callLogListItemViewHolder.showViewStub(true);
+        }else{
+            callLogListItemViewHolder.showViewStub(false);
+        }
     }
 
 
     @Override
-    public void onItemClick(CallDetail detail, int position) {
+    public void onItemClick(CallLogListItemViewHolder viewHolder, int position) {
+
+        if (mCurrentlyExpandedPosition == position){
+            viewHolder.showViewStub(false);
+            mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+        }else{
+
+            if (mCurrentlyExpandedPosition != RecyclerView.NO_POSITION) {
+                notifyItemChanged(mCurrentlyExpandedPosition);
+            }
+
+            viewHolder.showViewStub(true);
+            mCurrentlyExpandedPosition = position;
+        }
+
         if (mOnItemClickListener != null){
-            mOnItemClickListener.onItemClick(detail, position);
+            mOnItemClickListener.onItemClick(viewHolder, position);
         }
     }
 }
