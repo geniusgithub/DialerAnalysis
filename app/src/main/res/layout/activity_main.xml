@@ -27,6 +27,13 @@
     </Button>
 
     <Button
+        android:id="@+id/bt_dialer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialpad">
+    </Button>
+
+    <Button
         android:id="@+id/bt_test1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -60,6 +60,11 @@
 
         <activity android:name=".calllog.CallLogActivity"     android:label="CallLog">
         </activity>
+
+        <activity android:name=".dialpad.DialerActivity"     android:label="Dialer"
+                  android:configChanges="orientation|keyboardHidden|screenSize|screenLayout">
+        </activity>
+
     </application>
 
 </manifest>

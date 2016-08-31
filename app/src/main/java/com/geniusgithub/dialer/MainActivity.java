@@ -8,11 +8,13 @@ import android.widget.Button;
 
 import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
+import com.geniusgithub.dialer.dialpad.DialerActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button mBtnContact;
     private Button mBtnCalllog;
+    private Button mBtnDialpad;
 
     private KeyboardTone mKeyboardTome;
     private Button mBtnTest1;
@@ -42,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
+        mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
+        mBtnDialpad.setOnClickListener(this);
 
         mBtnTest1 = (Button) findViewById(R.id.bt_test1);
         mBtnTest2 = (Button) findViewById(R.id.bt_test2);
@@ -64,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_calllog:
                 onCalllog();
+                break;
+            case R.id.bt_dialer:
+                onDialpad();
                 break;
             case R.id.bt_test1:
                 mKeyboardTome.playSoundPool(6, 1, false);
@@ -90,4 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    private void onDialpad(){
+        Intent intent = new Intent();
+        intent.setClass(this, DialerActivity.class);
+        startActivity(intent);
+    }
 }
