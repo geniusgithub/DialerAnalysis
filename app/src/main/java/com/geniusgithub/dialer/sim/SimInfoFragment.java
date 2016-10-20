@@ -62,11 +62,19 @@ public class SimInfoFragment extends Fragment implements View.OnClickListener{
     private void getSub(){
         SubscriptionManager subscriptionManager = SubscriptionManager.from(mContext);
 
-        int sub1 = SubscriptionManageReflect.static_getSubId(0);
-        int sub2 = SubscriptionManageReflect.static_getSubId(1);
+        int sub1[] = SubscriptionManager.getSubId(0);
+        int sub2[] =  SubscriptionManager.getSubId(1);
+        int inSub1 = -1;
+        if (sub1 != null){
+            inSub1 = sub1[0];
+        }
+        int inSub2 = -1;
+        if (sub2 != null){
+            inSub2 = sub1[0];
+        }
 
-        SubscriptionInfo info1 = subscriptionManager.getActiveSubscriptionInfo(sub1);
-        SubscriptionInfo info2 = subscriptionManager.getActiveSubscriptionInfo(sub2);
+        SubscriptionInfo info1 = subscriptionManager.getActiveSubscriptionInfo(inSub1);
+        SubscriptionInfo info2 = subscriptionManager.getActiveSubscriptionInfo(inSub2);
 
         String value = "slotid = 0\n" + getSubInfo(info1) + "\n======================\nslotid = 1\n" + getSubInfo(info2);
         mTvSub.setText(value);

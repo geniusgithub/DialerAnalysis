@@ -19,8 +19,6 @@ public class DialerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AlwaysLog.i(TAG, "onCreate");
         setContentView(R.layout.activity_dialer_unit);
-        getFragmentManager().beginTransaction().add(R.id.dialtacts_container, new DialpadFragment(), "dialer_fragment").commit();
-
         mControlCenter = new DialpadControlCenter(this, R.id.dialtacts_container);
         mControlCenter.onCreate(savedInstanceState);
 
