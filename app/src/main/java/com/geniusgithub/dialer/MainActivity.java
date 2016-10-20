@@ -9,17 +9,20 @@ import android.widget.Button;
 import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
 import com.geniusgithub.dialer.dialpad.DialerActivity;
+import com.geniusgithub.dialer.sim.SimActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private Button mBtnSim;
     private Button mBtnContact;
     private Button mBtnCalllog;
     private Button mBtnDialpad;
 
-    private KeyboardTone mKeyboardTome;
+
     private Button mBtnTest1;
     private Button mBtnTest2;
     private Button mBtnTest3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +32,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
 
-        mKeyboardTome = new KeyboardTone(this);
-        mKeyboardTome.initSoundPool();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+;
     }
 
     @Override
     protected void onDestroy() {
-        mKeyboardTome.releasePool();
+
         super.onDestroy();
     }
 
     private void initView() {
         setContentView(R.layout.activity_main);
 
+        mBtnSim = (Button)findViewById(R.id.bt_sim);
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
+        mBtnSim.setOnClickListener(this);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
@@ -63,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.bt_sim:
+                onSim();
+                break;
             case R.id.bt_contact:
                onContact();
                 break;
@@ -72,17 +106,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_dialer:
                 onDialpad();
                 break;
-            case R.id.bt_test1:
-                mKeyboardTome.playSoundPool(6, 1, false);
-                break;
-            case R.id.bt_test2:
-             //   playTone(2);
-                mKeyboardTome.playSoundPool(6, 1, true);
-                break;
-            case R.id.bt_test3:
-                mKeyboardTome.playSoundPool(5, 1, false);
-                break;
         }
+    }
+
+    private void onSim(){
+        Intent intent = new Intent();
+        intent.setClass(this, SimActivity.class);
+        startActivity(intent);
     }
 
     private void onContact(){

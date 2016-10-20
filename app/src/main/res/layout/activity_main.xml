@@ -13,6 +13,13 @@
     >
 
     <Button
+        android:id="@+id/bt_sim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIM">
+    </Button>
+
+    <Button
         android:id="@+id/bt_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

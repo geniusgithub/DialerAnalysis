@@ -55,6 +55,9 @@
         <activity android:name=".RequestPermissionsActivity">
         </activity>
 
+        <activity android:name=".sim.SimActivity"     android:label="Sim">
+        </activity>
+
         <activity android:name=".contact.ContactUnitActivity"     android:label="ContactUnit">
         </activity>
 
