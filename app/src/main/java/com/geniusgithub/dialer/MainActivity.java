@@ -1,11 +1,14 @@
 package com.geniusgithub.dialer;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.contacts.common.util.PermissionsUtil;
+import com.geniusgithub.dialer.blockednumber.BlockedNumbersActivity;
 import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
 import com.geniusgithub.dialer.dialpad.DialerActivity;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnContact;
     private Button mBtnCalllog;
     private Button mBtnDialpad;
-
+    private Button mBtnBlockNumber;
 
     private Button mBtnTest1;
     private Button mBtnTest2;
@@ -75,10 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
+        mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
         mBtnSim.setOnClickListener(this);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
+        mBtnBlockNumber.setOnClickListener(this);
 
         mBtnTest1 = (Button) findViewById(R.id.bt_test1);
         mBtnTest2 = (Button) findViewById(R.id.bt_test2);
@@ -89,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnTest1.setVisibility(View.GONE);
         mBtnTest2.setVisibility(View.GONE);
         mBtnTest3.setVisibility(View.GONE);
+
+        if (PermissionsUtil.getApiVersion() < Build.VERSION_CODES.N){
+            mBtnBlockNumber.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -105,6 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_dialer:
                 onDialpad();
+                break;
+            case R.id.bt_blocknumber:
+                onBlockNumber();
                 break;
         }
     }
@@ -130,6 +142,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onDialpad(){
         Intent intent = new Intent();
         intent.setClass(this, DialerActivity.class);
+        startActivity(intent);
+    }
+
+    private void onBlockNumber(){
+        Intent intent = new Intent();
+        intent.setClass(this, BlockedNumbersActivity.class);
         startActivity(intent);
     }
 }

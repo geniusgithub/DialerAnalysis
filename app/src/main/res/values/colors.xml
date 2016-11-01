@@ -11,4 +11,10 @@
     <color name="cardview_shadow_start_color">#37000000</color>
 
     <color name="call_log_action_divider">#eeeeee</color>
+
+
+    <color name="blocked_numbers_divider_color">#e5e5e5</color>
+    <color name="blocked_numbers_butter_bar_color">#f5f5f5</color>
+    <color name="blocked_numbers_title_text_color">#ba000000</color>
+    <color name="blocked_numbers_secondary_text_color">#89000000</color>
 </resources>

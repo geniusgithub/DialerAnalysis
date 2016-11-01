@@ -70,7 +70,7 @@ public class SimInfoFragment extends Fragment implements View.OnClickListener{
         }
         int inSub2 = -1;
         if (sub2 != null){
-            inSub2 = sub1[0];
+            inSub2 = sub2[0];
         }
 
         SubscriptionInfo info1 = subscriptionManager.getActiveSubscriptionInfo(inSub1);

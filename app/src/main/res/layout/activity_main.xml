@@ -41,6 +41,13 @@
     </Button>
 
     <Button
+        android:id="@+id/bt_blocknumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BlockNumber">
+    </Button>
+
+    <Button
         android:id="@+id/bt_test1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
