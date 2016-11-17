@@ -59,6 +59,11 @@
         <activity android:name=".sim.SimActivity"     android:label="Sim">
         </activity>
 
+
+        <activity android:name=".emergency.EmergencyActivity"     android:label="Emergency">
+        </activity>
+
+
         <activity android:name=".contact.ContactUnitActivity"     android:label="ContactUnit">
         </activity>
 

@@ -19,6 +19,14 @@
         android:text="SIM">
     </Button>
 
+
+    <Button
+        android:id="@+id/bt_emergency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EMERGENCY">
+    </Button>
+
     <Button
         android:id="@+id/bt_contact"
         android:layout_width="match_parent"
