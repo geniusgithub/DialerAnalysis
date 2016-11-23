@@ -13,12 +13,14 @@ import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
 import com.geniusgithub.dialer.dialpad.DialerActivity;
 import com.geniusgithub.dialer.emergency.EmergencyActivity;
+import com.geniusgithub.dialer.notify.NotifyActivity;
 import com.geniusgithub.dialer.sim.SimActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button mBtnSim;
     private Button mBtnEmergency;
+    private Button mBtnNotify;
     private Button mBtnContact;
     private Button mBtnCalllog;
     private Button mBtnDialpad;
@@ -78,12 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mBtnSim = (Button)findViewById(R.id.bt_sim);
         mBtnEmergency = (Button)findViewById(R.id.bt_emergency);
+        mBtnNotify = (Button)findViewById(R.id.bt_notify);
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
         mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
         mBtnSim.setOnClickListener(this);
         mBtnEmergency.setOnClickListener(this);
+        mBtnNotify.setOnClickListener(this);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
@@ -113,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_emergency:
                 onEmergency();
                 break;
+            case R.id.bt_notify:
+                onNotify();
+                break;
             case R.id.bt_contact:
                onContact();
                 break;
@@ -137,6 +144,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onEmergency(){
         Intent intent = new Intent();
         intent.setClass(this, EmergencyActivity.class);
+        startActivity(intent);
+    }
+
+    private void onNotify(){
+        Intent intent = new Intent();
+        intent.setClass(this, NotifyActivity.class);
         startActivity(intent);
     }
 
