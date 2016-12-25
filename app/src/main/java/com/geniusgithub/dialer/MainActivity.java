@@ -13,6 +13,7 @@ import com.geniusgithub.dialer.calllog.CallLogActivity;
 import com.geniusgithub.dialer.contact.ContactUnitActivity;
 import com.geniusgithub.dialer.dialpad.DialerActivity;
 import com.geniusgithub.dialer.emergency.EmergencyActivity;
+import com.geniusgithub.dialer.ims.IMSActivity;
 import com.geniusgithub.dialer.notify.NotifyActivity;
 import com.geniusgithub.dialer.sim.SimActivity;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button mBtnSim;
     private Button mBtnEmergency;
+    private Button mBtnIMS;
     private Button mBtnNotify;
     private Button mBtnContact;
     private Button mBtnCalllog;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mBtnSim = (Button)findViewById(R.id.bt_sim);
         mBtnEmergency = (Button)findViewById(R.id.bt_emergency);
+        mBtnIMS = (Button)findViewById(R.id.bt_ims);
         mBtnNotify = (Button)findViewById(R.id.bt_notify);
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
         mBtnSim.setOnClickListener(this);
         mBtnEmergency.setOnClickListener(this);
+        mBtnIMS.setOnClickListener(this);
         mBtnNotify.setOnClickListener(this);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
@@ -117,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_emergency:
                 onEmergency();
                 break;
+            case R.id.bt_ims:
+                onIMS();
+                break;
             case R.id.bt_notify:
                 onNotify();
                 break;
@@ -144,6 +151,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onEmergency(){
         Intent intent = new Intent();
         intent.setClass(this, EmergencyActivity.class);
+        startActivity(intent);
+    }
+
+    private void onIMS(){
+        Intent intent = new Intent();
+        intent.setClass(this, IMSActivity.class);
         startActivity(intent);
     }
 

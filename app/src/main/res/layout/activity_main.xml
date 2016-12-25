@@ -28,6 +28,13 @@
     </Button>
 
     <Button
+        android:id="@+id/bt_ims"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IMS">
+    </Button>
+
+    <Button
         android:id="@+id/bt_notify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

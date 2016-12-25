@@ -63,6 +63,9 @@
         <activity android:name=".emergency.EmergencyActivity"     android:label="Emergency">
         </activity>
 
+        <activity android:name=".ims.IMSActivity"     android:label="IMS">
+        </activity>
+
         <activity android:name=".notify.NotifyActivity"     android:label="Notify">
             <intent-filter>
                 <action android:name="com.geniusgithub.dialer.notify" />
