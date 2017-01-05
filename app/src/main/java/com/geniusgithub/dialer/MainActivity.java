@@ -16,6 +16,7 @@ import com.geniusgithub.dialer.emergency.EmergencyActivity;
 import com.geniusgithub.dialer.ims.IMSActivity;
 import com.geniusgithub.dialer.notify.NotifyActivity;
 import com.geniusgithub.dialer.sim.SimActivity;
+import com.geniusgithub.dialer.vvm.VisualVoicamailActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnNotify;
     private Button mBtnContact;
     private Button mBtnCalllog;
+    private Button mBtnVVM;
     private Button mBtnDialpad;
     private Button mBtnBlockNumber;
 
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnNotify = (Button)findViewById(R.id.bt_notify);
         mBtnContact = (Button)findViewById(R.id.bt_contact);
         mBtnCalllog = (Button)findViewById(R.id.bt_calllog);
+        mBtnVVM = (Button)findViewById(R.id.bt_vvm);
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
         mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
         mBtnSim.setOnClickListener(this);
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnNotify.setOnClickListener(this);
         mBtnContact.setOnClickListener(this);
         mBtnCalllog.setOnClickListener(this);
+        mBtnVVM.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
         mBtnBlockNumber.setOnClickListener(this);
 
@@ -132,6 +136,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_calllog:
                 onCalllog();
+                break;
+            case R.id.bt_vvm:
+                onVVM();
                 break;
             case R.id.bt_dialer:
                 onDialpad();
@@ -177,6 +184,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setClass(this, CallLogActivity.class);
         startActivity(intent);
     }
+
+    private void onVVM(){
+        Intent intent = new Intent();
+        intent.setClass(this, VisualVoicamailActivity.class);
+        startActivity(intent);
+    }
+
 
     private void onDialpad(){
         Intent intent = new Intent();

@@ -56,6 +56,13 @@
     </Button>
 
     <Button
+        android:id="@+id/bt_vvm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VVM">
+    </Button>
+
+    <Button
         android:id="@+id/bt_dialer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
