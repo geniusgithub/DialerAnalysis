@@ -87,22 +87,16 @@ public class RequestPermissionsActivity extends Activity{
 
 
 	private void requestNecessaryRequiredPermissions(){
-		String []permission = new String[]{PermissionsUtil.PHONE,
-											PermissionsUtil.CONTACTS,
-											PermissionsUtil.LOCATION,
-				PermissionsUtil.STORAGE};
-		
-		
-		
 		requestSpecialPermissions(PermissionsUtil.PHONE, REQUEST_PHONE_PERMISSION);
-		
 	}
-
-	
 
 	private void requestSpecialPermissions(String permission, int requestCode){
 		String []permissions = new String[]{permission};
 		requestPermissions(permissions, requestCode);
+	}
+
+	private void requestSpecialPermissions(String permission[], int requestCode){
+		requestPermissions(permission, requestCode);
 	}
 
 	

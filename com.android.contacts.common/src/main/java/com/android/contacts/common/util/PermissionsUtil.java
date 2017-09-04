@@ -16,6 +16,7 @@
 
 package com.android.contacts.common.util;
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -36,6 +37,10 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.android.contacts.common.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utility class to help with runtime permissions.
  */
@@ -45,62 +50,121 @@ public class PermissionsUtil {
     // only need to check a single permission in each group.
     // Note: This assumes that the app has correctly requested for all the relevant permissions
     // in its Manifest file.
-    public static final String PHONE = permission.CALL_PHONE;
-    public static final String CONTACTS = permission.READ_CONTACTS;
-    public static final String SMS = permission.SEND_SMS;
-    public static final String LOCATION = permission.ACCESS_FINE_LOCATION;
-    public static final String STORAGE = permission.READ_EXTERNAL_STORAGE;
-    public static final String CALENDAR = permission.READ_CALENDAR;
-    public static final String MICROPHONE = permission.RECORD_AUDIO;
-    public static final String SENSORS = permission.BODY_SENSORS;
-    public static final String CAMERA = permission.CAMERA;
+    public static final String PHONE[];
+    public static final String CONTACTS[];
+    public static final String SMS[];
+    public static final String LOCATION[];
+    public static final String STORAGE[];
+    public static final String CALENDAR[];
+    public static final String MICROPHONE[];
+    public static final String SENSORS[];
+    public static final String CAMERA[];
+
+    public static final String[] sRequiredPermissions;
 
     private static boolean sInitialized = false;
     public static boolean sIsAtLeastM = getApiVersion() >= android.os.Build.VERSION_CODES.M;
     public static final String PACKAGE_URI_PREFIX = "package:";
     public static final String SECURITY_INTENT = "com.android.SETTINGS";
 
+    static {
+        CALENDAR = new String[]{
+                Manifest.permission.READ_CALENDAR,
+                Manifest.permission.WRITE_CALENDAR};
+
+        CAMERA = new String[]{
+                Manifest.permission.CAMERA};
+
+        CONTACTS = new String[]{
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.WRITE_CONTACTS,
+                Manifest.permission.GET_ACCOUNTS};
+
+        LOCATION = new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        MICROPHONE = new String[]{
+                Manifest.permission.RECORD_AUDIO};
+
+        PHONE = new String[]{
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_CALL_LOG,
+                Manifest.permission.WRITE_CALL_LOG,
+                Manifest.permission.USE_SIP,
+                Manifest.permission.PROCESS_OUTGOING_CALLS};
+
+        SENSORS = new String[]{
+                Manifest.permission.BODY_SENSORS};
+
+        SMS = new String[]{
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.RECEIVE_SMS,
+                Manifest.permission.READ_SMS,
+                Manifest.permission.RECEIVE_WAP_PUSH,
+                Manifest.permission.RECEIVE_MMS};
+
+        STORAGE = new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        ArrayList<String> requestPermissons = new ArrayList<>();
+        addRequestPermission(requestPermissons, PHONE);
+        addRequestPermission(requestPermissons, CONTACTS);
+        addRequestPermission(requestPermissons, LOCATION);
+        addRequestPermission(requestPermissons, STORAGE);
+
+        sRequiredPermissions = (String [])requestPermissons.toArray(new String[0]);;
+    }
+
+    private static void addRequestPermission(List<String> requestPermissons, String[] permission){
+        for(String value: permission){
+            requestPermissons.add(value);
+        }
+    }
+
     public static int getApiVersion() {
         return android.os.Build.VERSION.SDK_INT;
     }
 
-    public static String[] sRequiredPermissions = new String[] { PHONE, CONTACTS, LOCATION, STORAGE };
+
 
 
     public static boolean hasPhonePermissions(Context context) {
-        return hasPermission(context, PHONE);
+        return hasPermissions(context, PHONE);
     }
 
     public static boolean hasContactsPermissions(Context context) {
-        return hasPermission(context, CONTACTS);
+        return hasPermissions(context, CONTACTS);
     }
 
     public static boolean hasLocationPermissions(Context context) {
-        return hasPermission(context, LOCATION);
+        return hasPermissions(context, LOCATION);
     }
 
     public static boolean hasSmsPermissions(Context context) {
-        return hasPermission(context, SMS);
+        return hasPermissions(context, SMS);
     }
 
     public static boolean hasStoragePermissions(Context context) {
-        return hasPermission(context, STORAGE);
+        return hasPermissions(context, STORAGE);
     }
 
     public static boolean hasCalendarPermissions(Context context) {
-        return hasPermission(context, CALENDAR);
+        return hasPermissions(context, CALENDAR);
     }
 
     public static boolean hasMicrophonePermissions(Context context) {
-        return hasPermission(context, MICROPHONE);
+        return hasPermissions(context, MICROPHONE);
     }
 
     public static boolean hasSensorsPermissions(Context context) {
-        return hasPermission(context, SENSORS);
+        return hasPermissions(context, SENSORS);
     }
 
     public static boolean hasCameraPermissions(Context context) {
-        return hasPermission(context, CAMERA);
+        return hasPermissions(context, CAMERA);
     }
 
 
