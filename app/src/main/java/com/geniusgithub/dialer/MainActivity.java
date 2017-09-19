@@ -14,6 +14,7 @@ import com.geniusgithub.dialer.contact.ContactUnitActivity;
 import com.geniusgithub.dialer.dialpad.DialerActivity;
 import com.geniusgithub.dialer.emergency.EmergencyActivity;
 import com.geniusgithub.dialer.ims.IMSActivity;
+import com.geniusgithub.dialer.incall.InCallActivity;
 import com.geniusgithub.dialer.notify.NotifyActivity;
 import com.geniusgithub.dialer.sim.SimActivity;
 import com.geniusgithub.dialer.vvm.VisualVoicamailActivity;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnVVM;
     private Button mBtnDialpad;
     private Button mBtnBlockNumber;
+    private Button mBtnInCall;
 
     private Button mBtnTest1;
     private Button mBtnTest2;
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnVVM = (Button)findViewById(R.id.bt_vvm);
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
         mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
+        mBtnInCall = (Button)findViewById(R.id.bt_incall);
         mBtnSim.setOnClickListener(this);
         mBtnEmergency.setOnClickListener(this);
         mBtnIMS.setOnClickListener(this);
@@ -100,7 +103,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnVVM.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
         mBtnBlockNumber.setOnClickListener(this);
+        mBtnInCall.setOnClickListener(this);
 
+
+        mBtnBlockNumber.setVisibility(View.GONE);
+        mBtnVVM.setVisibility(View.GONE);
+        mBtnContact.setVisibility(View.GONE);
         mBtnTest1 = (Button) findViewById(R.id.bt_test1);
         mBtnTest2 = (Button) findViewById(R.id.bt_test2);
         mBtnTest3 = (Button) findViewById(R.id.bt_test3);
@@ -145,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_blocknumber:
                 onBlockNumber();
+                break;
+            case R.id.bt_incall:
+                onInCall();
                 break;
         }
     }
@@ -201,6 +212,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onBlockNumber(){
         Intent intent = new Intent();
         intent.setClass(this, BlockedNumbersActivity.class);
+        startActivity(intent);
+    }
+
+    private void onInCall(){
+        Intent intent = new Intent();
+        intent.setClass(this, InCallActivity.class);
         startActivity(intent);
     }
 }

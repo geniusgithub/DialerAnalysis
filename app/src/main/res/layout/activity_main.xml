@@ -76,7 +76,12 @@
         android:text="BlockNumber">
     </Button>
 
-
+    <Button
+        android:id="@+id/bt_incall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="InCallComponent">
+    </Button>
 
     <Button
         android:id="@+id/bt_test1"
