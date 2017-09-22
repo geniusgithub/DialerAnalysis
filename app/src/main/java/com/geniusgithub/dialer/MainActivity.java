@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.TelecomManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,7 @@ import com.geniusgithub.dialer.ims.IMSActivity;
 import com.geniusgithub.dialer.incall.InCallActivity;
 import com.geniusgithub.dialer.notify.NotifyActivity;
 import com.geniusgithub.dialer.sim.SimActivity;
+import com.geniusgithub.dialer.telecom.TelecomActivity;
 import com.geniusgithub.dialer.vvm.VisualVoicamailActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnDialpad;
     private Button mBtnBlockNumber;
     private Button mBtnInCall;
+    private Button mBtnTelecom;
 
     private Button mBtnTest1;
     private Button mBtnTest2;
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnDialpad = (Button)findViewById(R.id.bt_dialer);
         mBtnBlockNumber = (Button)findViewById(R.id.bt_blocknumber);
         mBtnInCall = (Button)findViewById(R.id.bt_incall);
+        mBtnTelecom =  (Button)findViewById(R.id.bt_telecom);
         mBtnSim.setOnClickListener(this);
         mBtnEmergency.setOnClickListener(this);
         mBtnIMS.setOnClickListener(this);
@@ -103,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnVVM.setOnClickListener(this);
         mBtnDialpad.setOnClickListener(this);
         mBtnBlockNumber.setOnClickListener(this);
+        mBtnTelecom.setOnClickListener(this);
         mBtnInCall.setOnClickListener(this);
 
 
@@ -156,6 +161,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_incall:
                 onInCall();
+                break;
+            case R.id.bt_telecom:
+                onTelecomm();
                 break;
         }
     }
@@ -218,6 +226,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onInCall(){
         Intent intent = new Intent();
         intent.setClass(this, InCallActivity.class);
+        startActivity(intent);
+    }
+
+    private void onTelecomm(){
+        Intent intent = new Intent();
+        intent.setClass(this, TelecomActivity.class);
         startActivity(intent);
     }
 }

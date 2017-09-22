@@ -112,7 +112,11 @@
        <activity android:name=".incall.InCallActivity"     android:label="InCall">
        </activity>
 
-        <service
+       <activity android:name=".telecom.TelecomActivity"     android:label="Telecom">
+       </activity>
+
+
+       <service
             android:name=".notify.MyNotifyService"
             android:directBootAware="true"
             android:exported="false"
